@@ -96,6 +96,18 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/intelligent-kanban',
+    component: Layout,
+    children: [
+      {
+        path: 'kpi',
+        component: () => import('@/views/intelligent-kanban/kpi'),
+        name: 'Intelligent-kanban',
+        meta: { title: 'Intelligent-kanban', icon: 'documentation', affix: true }
+      }
+    ]
+  },
+  {
     path: '/guide',
     component: Layout,
     redirect: '/guide/index',
