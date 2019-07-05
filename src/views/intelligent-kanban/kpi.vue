@@ -1,32 +1,42 @@
 <template>
-  <!-- <div class="container">
-    <el-card class="box-card">
-      <div class="head">
-        <span style="color:white">生产绩效</span>
+  <div class="container">
+    <div class="card">
+      <div class="card-head">
+        <span>生产绩效</span>
       </div>
-      <Shengchanjixiao />
-    </el-card>
-  </div> -->
-  <el-row class="container">
-    <el-col :span="12">
-      <div class="grid-content bg-purple">
-        <Product style="width:45%,height:50%" />
+      
+         <ProductPerform />
+         <TablePerform  />
+    
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <span>生产消耗</span>
       </div>
-    </el-col>
-    <el-col :span="12">
-      <div class="grid-content bg-purple">
-        <Product style="width:45%,height:50%" />
+      <ProductConsumption />
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <span>生产产量</span>
       </div>
-    </el-col>
-  </el-row>
+      <ProductPerform />
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <span>原料库存</span>
+      </div>
+      <ProductPerform />
+    </div>
+  </div>
 </template>
 
 <script>
-import Product from './pie/product-perform'
-
+import ProductPerform from './kpi/components/product-perform'
+import ProductConsumption from './kpi/components/product-consumption'
+import TablePerform from './kpi/table/perform'
 export default {
   name: 'LineChart',
-  components: { Product }
+  components: { ProductPerform, ProductConsumption, TablePerform }
 }
 </script>
 
@@ -35,13 +45,18 @@ export default {
     background: #08263a;
     width: 100%;
     height: calc(100vh - 84px);
+    display: flex;
+    flex-wrap: wrap;
 }
 .card{
-    width: 500px;
-    height: 500px;
+    width: 50%;
+    height:50%;
     border-color: rgb(23, 23, 119);
     border-width: 2;
-    background: rgb(15, 65, 158);
+    border-style: solid;
+    background: #08263a;
+    display: flex;
+    flex-wrap: wrap;
 }
 .head{
    border-width: 2px;
@@ -53,4 +68,28 @@ export default {
     background:none;
     width: 0.5*width;
 }
+.pie{
+    width: 100%;
+    height: 100%;
+    border-width: 2px;
+    border-color: aliceblue;
+    border-style: solid;
+    }
+.grid-content{
+    border-width: 2px;
+    border-color: aliceblue;
+    border-style: solid;
+}
+.card-head{
+  background: rgb(4, 52, 124);
+  color: aliceblue;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  width: 100%;
+}
+
 </style>
