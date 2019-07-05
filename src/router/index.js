@@ -111,12 +111,6 @@ export const constantRoutes = [
         component: () => import('@/views/intelligent-kanban/deviceStatistics'),
         name: 'deviceStatistics',
         meta: { title: 'deviceStatistics'}
-      },
-      {
-        path: 'charts-demo',
-        component: () => import('@/views/intelligent-kanban/charts-demo'),
-        name: 'charts-demo',
-        meta: { title: 'charts-demo'}
       }
     ]
   },
