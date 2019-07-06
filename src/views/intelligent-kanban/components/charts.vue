@@ -31,10 +31,24 @@ export default {
       }
     },
     yText: {
-      type: String,
+      type: Array,
       default() {
         // 纵轴文本
-        return "y-text";
+        return [];
+      }
+    },
+    xList: {
+      type: Array,
+      default() {
+        // 横轴数据
+        return [];
+      }
+    },
+    yList: {
+      type: Array,
+      default() {
+        // 纵轴数据
+        return [];
       }
     },
     chartData: {
@@ -51,6 +65,13 @@ export default {
     height: {
       type: Number,
       default: 0
+    },
+    stackFlag: {
+      type: Boolean,
+      default() {
+        // 横轴文本
+        return false;
+      }
     }
   },
   computed: {
@@ -62,6 +83,11 @@ export default {
     yAxisData() {
       return this.chartData.map(function(item) {
         return item[1];
+      });
+    },
+    legendData() {
+        return this.yText.map(function(item) {
+        return item[0];
       });
     }
   },
@@ -76,10 +102,10 @@ export default {
     // 生成渲染图表div的宽度与高度
     generatorWithAndHeight() {
       this.chartWidth = `${
-        this.width ? this.width : document.body.offsetWidth * 0.8
+        this.width ? this.width : document.body.offsetWidth* this.chartWidth * 0.6
       }px`;
       this.chartHeight = `${
-        this.height ? this.height : document.body.offsetHeight * 0.6
+        this.height ? this.height : document.body.offsetHeight* this.chartHeight * 0.6
       }px`;
     },
     // 绘制图表
@@ -93,11 +119,22 @@ export default {
         case "line":
           chart.setOption(this.generatorLineOption());
           break;
-        case "bar":
+        case "bar":   // 标注柱形图
           chart.setOption(this.generatorBarOption());
+          this.barSetOptionFun(chart);
           break;
-        case "pie":
+        case "bar1":  // X Y轴位置互换后的柱形图
+          chart.setOption(this.generatorBar1Option());
+          this.barSetOptionFun(chart);
+        break;
+        case "pie":  // 标注饼图
           chart.setOption(this.generatorPieOption());
+          
+          break;
+        case "pie1":  // 环形图
+          debugger
+          chart.setOption(this.generatorPie1Option());
+          this.pie1SetOptionFun(chart);
           break;
         default:
           console.error(`chartType ${this.chartType} is invalid`);
@@ -106,7 +143,7 @@ export default {
       let self = this;
       let work = null;
       window.addEventListener("resize", function() {
-       // self.generatorWithAndHeight();
+        self.generatorWithAndHeight();
         if (work == null) {
           work = setTimeout(function() {
             chart.resize();
@@ -137,6 +174,59 @@ export default {
         ]
       };
     },
+    barSetOptionFun(charts) {
+      debugger
+      var series = [];
+      let yType = this.yText.map(function(item) {
+        return item[1];
+      });
+
+      let yColor = this.yText.map(function(item) {
+        return item[2];
+      });
+
+      if(this.yList[0].length == 1) {
+        let dataList = this.yList.map(function(item) {
+          return item[0];
+        });
+        let serie = {
+          name: this.legendData[0],
+          type: yType[0],
+          barWidth: "15%",
+          // 普通样式。
+          itemStyle: {
+              // 点的颜色。
+              color: yColor[0]
+          },
+          data: dataList
+        }
+        series.push(serie);
+        charts.setOption({
+          series: series
+        });
+        return
+      }
+    
+      for (var i=0;i<this.yList.length;i++){
+        let serie = {
+          name: this.legendData[i],
+          type: yType[i],
+          barWidth: "10%",
+          stack:this.stackFlag,
+          // 普通样式。
+          itemStyle: {
+              // 点的颜色。
+              color: yColor[i]
+          },
+          data: this.yList[i]
+        }
+        series.push(serie);
+      }
+      
+      charts.setOption({
+        series: series
+      });
+    },
     generatorBarOption() {
       return {
         title: {
@@ -152,39 +242,222 @@ export default {
             type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
           }
         },
+         legend: {
+          x: 'right',
+          data:this.legendData,
+          textStyle: {
+            color: '#FFF'
+          }
+        },
         grid: {
           left: "3%",
           right: "4%",
-          top: "10%",
+          top: "20%",
           bottom: "5%",
           containLabel: true
         },
         xAxis: [
           {
             type: "category",
-            data: this.xAxisData,
+            data: this.xList,
             axisTick: {
               alignWithLabel: true
+            },
+            splitLine: {
+              show: false   // 图标的背景网格
+            },
+            axisLabel: {
+              textStyle: {
+                color:'#FFF'  
+              }
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#FFF'
+              }
             }
           }
         ],
         yAxis: [
           {
-            type: "value"
+            type: "value",
+            splitLine: {
+              show: false   // 图标的背景网格
+            },
+            axisLabel: {
+              textStyle: {
+                color:'#FFF'  
+              }
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#FFF'
+              }
+            }
           }
         ],
         series: [
           {
-            name: this.yText,
+            name: '',
             type: "bar",
-            barWidth: "60%",
-            data: this.yAxisData
+            barWidth: "20%",
+            data: []
           }
         ]
       };
     },
+    generatorBar1Option() {
+      return {
+        title: {
+          text: this.titleText,
+          subtext: this.subText,
+          x: "center"
+        },
+        color: ["#3398DB"],
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            // 坐标轴指示器，坐标轴触发有效
+            type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
+          }
+        },
+         legend: {
+          x: 'right',
+          data:this.legendData,
+          textStyle: {
+            color: '#FFF'
+          }
+        },
+        grid: {
+          left: "3%",
+          right: "4%",
+          top: "20%",
+          bottom: "5%",
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: "value",
+            splitLine: {
+              show: false   // 图标的背景网格
+            },
+            axisLabel: {
+              textStyle: {
+                color:'#FFF'  
+              }
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#FFF'
+              }
+            }
+          }
+        ],
+        yAxis: [
+          {
+            type: "category",
+            data: this.xList,
+            axisTick: {
+              alignWithLabel: true
+            },
+            splitLine: {
+              show: false   // 图标的背景网格
+            },
+            axisLabel: {
+              textStyle: {
+                color:'#FFF'  
+              }
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#FFF'
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            name: '',
+            type: "bar",
+            barWidth: "20%",
+            data: []
+          }
+        ]
+      };
+    },
+    pie1SetOptionFun(charts) {
+      debugger
+      var series = [];
+      let yName = this.yText.map(function(item) {
+        return item[0];
+      });
+
+      let innerRadius = this.yText.map(function(item) {
+        return item[1];
+      });
+
+      let outSideRadius = this.yText.map(function(item) {
+        return item[2];
+      });
+      
+      for (var i=0;i<this.yList.length;i++){
+        let pieData = [];
+
+        let nameList = this.yList[i].map(function(item) {
+          return item[0];
+        });
+        let valueList = this.yList[i].map(function(item) {
+          return item[1];
+        });
+
+        for (let index in nameList[i]) {
+          pieData.push({
+            value: valueList[index],
+            name: nameList[index]
+          });
+        }
+        let serie = {
+            name: yName[i],
+            type:'pie',
+            center: ["50%", "60%"],
+            radius : [innerRadius[i], outSideRadius[i]],
+            data: pieData,
+            itemStyle : {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: "rgba(0, 0, 0, 0.5)"
+                },
+                normal : {
+                    label : {
+                        show : false
+                    },
+                    labelLine : {
+                        show : false
+                    }
+                },
+                emphasis : {
+                    label : {
+                        show : true,
+                        position : 'center',
+                        textStyle : {
+                            fontSize : '30',
+                            fontWeight : 'bold'
+                        }
+                    }
+                }
+            }
+        }
+        series.push(serie);
+      }
+      
+      charts.setOption({
+        series: series
+      });
+    },
     generatorPieOption() {
       let pieData = [];
+      debugger
       for (let index in this.xAxisData) {
         pieData.push({
           value: this.yAxisData[index],
@@ -202,8 +475,8 @@ export default {
           formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
         legend: {
-          orient: "vertical",
-          left: "left",
+          orient: "horizontal",   // 布局方式，默认为水平布局，可选为：'horizontal' | 'vertical'
+          left: "right",
           data: this.xAxisData
         },
         series: [
@@ -213,12 +486,82 @@ export default {
             radius: "55%",
             center: ["50%", "60%"],
             data: pieData,
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
-              }
+            itemStyle : {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: "rgba(0, 0, 0, 0.5)"
+                },
+                normal : {
+                    label : {
+                        show : false
+                    },
+                    labelLine : {
+                        show : false
+                    }
+                },
+                emphasis : {
+                    label : {
+                        show : true,
+                        position : 'center',
+                        textStyle : {
+                            fontSize : '30',
+                            fontWeight : 'bold'
+                        }
+                    }
+                }
+            }
+          }
+        ]
+      };
+    },
+    generatorPie1Option() {
+      return {
+        title: {
+          text: this.titleText,
+          subtext: this.subText,
+          x: "center"
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+          orient: "horizontal",   // 布局方式，默认为水平布局，可选为：'horizontal' | 'vertical'
+          left: "right",
+          data: this.xList
+        },
+        series: [
+          {
+            name: "访问来源",
+            type: "pie",
+            radius: "55%",
+            center: ["50%", "60%"],
+            data: [],
+            itemStyle : {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: "rgba(0, 0, 0, 0.5)"
+                },
+                normal : {
+                    label : {
+                        show : false
+                    },
+                    labelLine : {
+                        show : false
+                    }
+                },
+                emphasis : {
+                    label : {
+                        show : true,
+                        position : 'center',
+                        textStyle : {
+                            fontSize : '30',
+                            fontWeight : 'bold'
+                        }
+                    }
+                }
             }
           }
         ]
@@ -230,7 +573,7 @@ export default {
     this.drawChart();
   },
   created() {
-  //  this.generatorWithAndHeight();
+    //this.generatorWithAndHeight();
   }
 };
 </script>
