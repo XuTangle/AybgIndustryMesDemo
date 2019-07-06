@@ -5,13 +5,15 @@
           <div class="left">
             <div class="main-left1 divBorder">
               <div class="title">设备腐蚀</div>
-              <!-- <charts chartType="bar1" ref="bar1" :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" :stackFlag="stackFlag"></charts> -->
+              <!-- <charts chartType="bar1"  :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" :stackFlag="stackFlag"></charts> -->
               <charts chartType="bar" :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" ></charts>
             </div>
             <div class="main-left2 divBorder">
               <div class="title">设备磨损</div>
-              <charts :chartData="chartData" chartType="pie1" ref="pie1" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts>
-              <!-- <charts chartType="bar" ref="bar" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts> -->
+              <!-- <charts chartType="line" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts> -->
+              <charts chartType="pie1" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts>
+              <!-- <charts chartType="pie" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts> -->
+              <!-- <charts chartType="bar" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts> -->
             </div>
           </div>
           <div class="main-center">
@@ -56,11 +58,11 @@
           <div class="right">
             <div class="main-right1 divBorder">
             <div class="title">设备泄露</div>
-            <charts chartType="bar" ref="bar" :xList="xList_right1" :yList="yList_right1" :xText="xText_right1" :yText="yText_right1"></charts>
+            <charts chartType="bar" :xList="xList_right1" :yList="yList_right1" :xText="xText_right1" :yText="yText_right1"></charts>
             </div>
             <div class="main-right2 divBorder">
               <div class="title">设备结垢</div>
-              <charts chartType="bar" ref="bar" :xList="xList_right2" :yList="yList_right2" :xText="xText_right2" :yText="yText_right2"></charts>
+              <charts chartType="bar" :xList="xList_right2" :yList="yList_right2" :xText="xText_right2" :yText="yText_right2"></charts>
             </div>
           </div>
         </div>
@@ -68,11 +70,11 @@
         <div class="bottom">
           <div class="bottom-left">
             <div class="title">设备运行时效分析</div>
-            <charts chartType="bar" ref="bar" :xList="xList_bottom1" :yList="yList_bottom1" :xText="xText_bottom1" :yText="yText_bottom1" :stackFlag="stackFlag"></charts>
+            <charts chartType="bar"  :xList="xList_bottom1" :yList="yList_bottom1" :xText="xText_bottom1" :yText="yText_bottom1" :stackFlag="stackFlag"></charts>
           </div>
           <div class="bottom-right">
             <div class="title">设备停运时间统计分析</div>
-            <charts chartType="bar" ref="bar" :xList="xList_bottom2" :yList="yList_bottom2" :xText="xText_bottom2" :yText="yText_bottom2"></charts>
+            <charts chartType="bar" :xList="xList_bottom2" :yList="yList_bottom2" :xText="xText_bottom2" :yText="yText_bottom2"></charts>
           </div>
         </div>
   </div>
@@ -115,9 +117,21 @@ export default {
 
       // 环形图demo 
       xList_left2:[['制造成本','#a6d192'],['产量','#99bce0'],['质量','#767db9'],['安全环保','#0ca2a3']],
-      yList_left2:[[['制造成本',25.28],['产量',77.56],['质量',34.49],['安全环保',46.22]],[['制造成本',65.41],['产量',25.13],['质量',27.67],['安全环保',50.85]]],
+      yList_left2:[[['制造成本',25],['产量',12],['质量',34],['安全环保',29]],[['制造成本',45],['产量',9],['质量',27],['安全环保',19]]],
       xText_left2:'生产绩效',  // x坐标的提示信息
       yText_left2:[['分厂1','50%','70%'],['分厂2','30%','45%']],   // y坐标的提示信息，chart类型，以及颜色数据
+
+      // 折现demo
+      // xList_left2:['称重给煤机','斗式提升机','二次风机','高压流化风机'],
+      // yList_left2:[[100,20,50,70],[30,60,70,28],[70,80,20,98],[10,80,50,38]],
+      // xText_left2:'设备腐蚀',  // x坐标的提示信息
+      // yText_left2:[['点蚀','#a6d192'],['缝隙腐蚀','#99bce0'],['磨损腐蚀','#767db9'],['应力腐蚀','#0ca2a3']], // y坐标的提示信息，chart类型，以及颜色数据
+      
+      // 饼图demo 
+      // xList_left2:[['制造成本','#a6d192'],['产量','#99bce0'],['质量','#767db9'],['安全环保','#0ca2a3']],
+      // yList_left2:[['制造成本',25.28],['产量',77.56],['质量',34.49],['安全环保',46.22]],
+      // xText_left2:'生产绩效',  // x坐标的提示信息
+      // yText_left2:[['生产绩效','50%']],   // y坐标的提示信息，chart类型，以及颜色数据
 
       xList_right1:['称重给煤机','斗式提升机','二次风机','高压流化风机'],
       yList_right1:[[70],[60],[20],[50]],
