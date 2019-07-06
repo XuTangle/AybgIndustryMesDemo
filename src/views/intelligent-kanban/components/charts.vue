@@ -86,8 +86,20 @@ export default {
       });
     },
     legendData() {
-        return this.yText.map(function(item) {
-        return item[0];
+        
+        if (this.chartType == 'pie1') {
+          return this.xList.map(function(item) {
+            return item[0];
+           });
+        } else {
+          return this.yText.map(function(item) {
+            return item[0];
+           });
+        }
+    },
+    colorData() {
+      return this.xList.map(function(item) {
+            return item[1];
       });
     }
   },
@@ -296,14 +308,7 @@ export default {
             }
           }
         ],
-        series: [
-          {
-            name: '',
-            type: "bar",
-            barWidth: "20%",
-            data: []
-          }
-        ]
+        series: []
       };
     },
     generatorBar1Option() {
@@ -375,14 +380,7 @@ export default {
             }
           }
         ],
-        series: [
-          {
-            name: '',
-            type: "bar",
-            barWidth: "20%",
-            data: []
-          }
-        ]
+        series: []
       };
     },
     pie1SetOptionFun(charts) {
@@ -441,7 +439,7 @@ export default {
                         show : true,
                         position : 'center',
                         textStyle : {
-                            fontSize : '30',
+                            fontSize : '15',
                             fontWeight : 'bold'
                         }
                     }
@@ -505,7 +503,7 @@ export default {
                         show : true,
                         position : 'center',
                         textStyle : {
-                            fontSize : '30',
+                            fontSize : '15',
                             fontWeight : 'bold'
                         }
                     }
@@ -529,42 +527,13 @@ export default {
         legend: {
           orient: "horizontal",   // 布局方式，默认为水平布局，可选为：'horizontal' | 'vertical'
           left: "right",
-          data: this.xList
-        },
-        series: [
-          {
-            name: "访问来源",
-            type: "pie",
-            radius: "55%",
-            center: ["50%", "60%"],
-            data: [],
-            itemStyle : {
-                emphasis: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: "rgba(0, 0, 0, 0.5)"
-                },
-                normal : {
-                    label : {
-                        show : false
-                    },
-                    labelLine : {
-                        show : false
-                    }
-                },
-                emphasis : {
-                    label : {
-                        show : true,
-                        position : 'center',
-                        textStyle : {
-                            fontSize : '30',
-                            fontWeight : 'bold'
-                        }
-                    }
-                }
-            }
+          data: this.legendData,
+          textStyle: {
+            color: '#FFF'
           }
-        ]
+        },
+        color:this.colorData,
+        series: []
       };
     }
   },

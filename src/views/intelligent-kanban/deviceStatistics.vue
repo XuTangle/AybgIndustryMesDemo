@@ -114,7 +114,7 @@ export default {
       // yText_left2:[['设备磨损率','bar','#a9d289']],   // y坐标的提示信息，chart类型，以及颜色数据
 
       // 环形图demo 
-      xList_left2:['制造成本','产量','质量','安全环保'],
+      xList_left2:[['制造成本','#a6d192'],['产量','#99bce0'],['质量','#767db9'],['安全环保','#0ca2a3']],
       yList_left2:[[['制造成本',25.28],['产量',77.56],['质量',34.49],['安全环保',46.22]],[['制造成本',65.41],['产量',25.13],['质量',27.67],['安全环保',50.85]]],
       xText_left2:'生产绩效',  // x坐标的提示信息
       yText_left2:[['分厂1','50%','70%'],['分厂2','30%','45%']],   // y坐标的提示信息，chart类型，以及颜色数据
@@ -212,7 +212,7 @@ export default {
  }
  .divBorder {
    margin-left:5px;
-	 border:2px solid #124d72;
+	 border:1.5px solid #124d72;
  }
  .bottom {
    width:100%;
@@ -223,14 +223,14 @@ export default {
    height:56%;
    float: left;
    margin-left:5px;
-   border:2px solid#124d72;
+   border:1.5px solid#124d72;
  }
  .bottom-right {
    width:50%;
    height:56%;
    float: right;
-   margin-right:5px;
-   border:2px solid #124d72;
+   margin-right:2px;
+   border:1.5px solid #124d72;
  }
  .main-center-top {
    width:100%;
