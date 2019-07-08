@@ -11,9 +11,9 @@
             <div class="main-left2 divBorder">
               <div class="title">设备磨损</div>
               <!-- <charts chartType="line" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts> -->
-              <charts chartType="pie1" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts>
+              <!-- <charts chartType="pie1" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts> -->
               <!-- <charts chartType="pie" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts> -->
-              <!-- <charts chartType="bar" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts> -->
+              <charts chartType="bar" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2"></charts>
             </div>
           </div>
           <div class="main-center">
@@ -92,7 +92,7 @@ export default {
     return {
       // tabPosition: "bar",
       // chartRefs: ["line", "bar", "pie"],
-       chartData: [["类别1", 100], ["类别2", 20], ["类别3", 30], ["类别3", 70]],
+      // chartData: [["类别1", 100], ["类别2", 20], ["类别3", 30], ["类别3", 70]],
       // chartData2: [["类别11", 100], ["类别22", 20], ["类别33", 30], ["类别33", 70]],
       
      
@@ -102,7 +102,7 @@ export default {
       // xText_left1:'设备腐蚀',  // x坐标的提示信息
       // yText_left1:[['点蚀','bar','#a6d192'],['缝隙腐蚀','bar','#99bce0'],['磨损腐蚀','bar','#767db9'],['应力腐蚀','bar','#0ca2a3']], // y坐标的提示信息，chart类型，以及颜色数据
       
-      stackFlag : true,   // 状态图是否要堆积数据 默认false
+      stackFlag : false,   // 状态图是否要堆积数据 默认false
 
       xList_left1:['称重给煤机','斗式提升机','二次风机','高压流化风机'],
       yList_left1:[[100,20,50,70],[30,60,70,28],[70,80,20,98],[10,80,50,38]],
@@ -110,16 +110,16 @@ export default {
       yText_left1:[['点蚀','bar','#a6d192'],['缝隙腐蚀','bar','#99bce0'],['磨损腐蚀','bar','#767db9'],['应力腐蚀','bar','#0ca2a3']], // y坐标的提示信息，chart类型，以及颜色数据
       
 
-      // xList_left2:['称重给煤机','斗式提升机','二次风机','高压流化风机'],
-      // yList_left2:[[50],[20],[30],[90]],
-      // xText_left2:'设备磨损',  // x坐标的提示信息
-      // yText_left2:[['设备磨损率','bar','#a9d289']],   // y坐标的提示信息，chart类型，以及颜色数据
+      xList_left2:['称重给煤机','斗式提升机','二次风机','高压流化风机'],
+      yList_left2:[[50],[20],[30],[90]],
+      xText_left2:'设备磨损',  // x坐标的提示信息
+      yText_left2:[['设备磨损率','bar','#a9d289']],   // y坐标的提示信息，chart类型，以及颜色数据
 
       // 环形图demo 
-      xList_left2:[['制造成本','#a6d192'],['产量','#99bce0'],['质量','#767db9'],['安全环保','#0ca2a3']],
-      yList_left2:[[['制造成本',25],['产量',12],['质量',34],['安全环保',29]],[['制造成本',45],['产量',9],['质量',27],['安全环保',19]]],
-      xText_left2:'生产绩效',  // x坐标的提示信息
-      yText_left2:[['分厂1','50%','70%'],['分厂2','30%','45%']],   // y坐标的提示信息，chart类型，以及颜色数据
+      // xList_left2:[['制造成本','#a6d192'],['产量','#99bce0'],['质量','#767db9'],['安全环保','#0ca2a3']],
+      // yList_left2:[[['制造成本',25],['产量',12],['质量',34],['安全环保',29]],[['制造成本',45],['产量',9],['质量',27],['安全环保',19]]],
+      // xText_left2:'生产绩效',  // x坐标的提示信息
+      // yText_left2:[['分厂1','50%','70%'],['分厂2','30%','45%']],   // y坐标的提示信息，chart类型，以及颜色数据
 
       // 折现demo
       // xList_left2:['称重给煤机','斗式提升机','二次风机','高压流化风机'],
@@ -173,7 +173,7 @@ export default {
     background:url('../../../public/static/bg.jpg');
     position: relative;
     width: 100%;
-    height: calc(100vh - 84px);
+    height: calc(100vh - 50px);
     color:#FFF;
  }
 

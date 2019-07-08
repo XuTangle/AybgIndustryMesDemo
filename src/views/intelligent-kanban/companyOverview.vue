@@ -20,6 +20,9 @@
             <li>我们公司最棒！！！</li>
             <li>我们公司最棒！！！</li>
             <li>我们公司最棒！！！</li>
+            <li>我们公司最棒！！！</li>
+            <li>我们公司最棒！！！</li>
+            <li>我们公司最棒！！！</li>
           </ul>
         </div>
       </div>
@@ -36,22 +39,40 @@
         </table>
         <div id="scorllTale">
            <ul>
-            <li>我们公司最棒！！！</li>
-            <li>我们公司最棒！！！</li>
-            <li>我们公司最棒！！！</li>
-            <li>我们公司最棒！！！</li>
-            <li>我们公司最棒！！！</li>
-            <li>我们公司最棒！！！</li>
-            <li>我们公司最棒！！！</li>
-            <li>我们公司最棒！！！</li>
-            <li>我们公司最棒！！！</li>
-            <li>我们公司最棒！！！</li>
-            <li>我们公司最棒！！！</li>
+            <li class="liContent" v-for="item in contentList" :key="item">
+              <div style="width:40vmin">
+               {{item.project}}
+              </div>
+              <div>
+                {{item.le}}
+              </div>
+              <div>
+                {{item.region}}
+              </div>
+            </li>
           </ul>
         </div>
         </div>
         <div class="log">
           <span style="font-size:2vmin">调度日志</span>
+          <div id="dispatch">
+            <ul>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+              <li>我们公司最棒！！！</li>
+          </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -216,6 +237,15 @@ export default {
           test: 0,
           state: 0
         }
+        ],
+        contentList:[
+          {project:"高炉1#水冷管温度",le:"高",region:"2#高炉"},
+          {project:"高炉1#水冷管温度",le:"高",region:"2#高炉"},
+          {project:"高炉1#水冷管温度",le:"高",region:"2#高炉"},
+          {project:"高炉1#水冷管温度",le:"高",region:"2#高炉"},
+          {project:"高炉1#水冷管温度",le:"高",region:"2#高炉"},
+          {project:"高炉1#水冷管温度",le:"高",region:"2#高炉"},
+          {project:"高炉1#水冷管温度",le:"高",region:"2#高炉"}
         ]
     };
   },
@@ -229,7 +259,8 @@ export default {
   mounted() {
     this.initChart();
     this.scoller("scroll-message");
-    this.scoller("scorllTale")
+    this.scoller("scorllTale");
+    this.scoller("dispatch")
   },
   methods: {
     scoller(byId){
@@ -292,7 +323,7 @@ export default {
         },
         series: [
           {
-            name: "直接访问",
+            name: "已完成",
             type: "bar",
             stack: "总量",
             label: {
@@ -304,7 +335,7 @@ export default {
             data: [320, 302, 301]
           },
           {
-            name: "邮件营销",
+            name: "未完成",
             type: "bar",
             stack: "总量",
             label: {
@@ -355,12 +386,13 @@ div {
 }
 ul{
   padding:0;margin:0;
-  padding-left: 2vmin
+  padding-left: 1vmin
 }
 li{
   padding:0;
   margin:0;
-  font-size: 2vmin
+  font-size: 1.7vmin;
+   height: 3vmin;
 }
 .introduction {
   margin: 1vmin;
@@ -407,9 +439,14 @@ li{
   flex-wrap: wrap;
 }
 #scorllTale{
-  height: 11.5vmin;
+  height: 11vmin;
   overflow:hidden;
   /* border: solid 0.5px black; */
+}
+#dispatch{
+  height: 8vmin;
+   overflow:hidden;
+   /* border: solid 0.5px black; */
 }
 #scorllTale li{
   list-style: none;
@@ -418,8 +455,16 @@ table{
   width: 100%
 }
 td{
-  width: 42%;
+  width: 40%;
   text-align: left;
-  font-size: 1.5vmin
+  font-size: 1.8vmin
+}
+.liContent{
+  height: 3vmin;
+  display: flex;
+  flex-direction: row;
+}
+.liContent div{
+  width: 50%
 }
 </style>

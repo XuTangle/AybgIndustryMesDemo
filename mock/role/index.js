@@ -3,7 +3,6 @@ import { deepClone } from '../../src/utils/index.js'
 import { asyncRoutes, constantRoutes } from './routes.js'
 
 const routes = deepClone([...constantRoutes, ...asyncRoutes])
-
 const roles = [
   {
     key: 'admin',
@@ -23,15 +22,26 @@ const roles = [
     description: 'Just a visitor. Can only see the home page and the document page',
     routes: [{
       path: '',
-      redirect: 'dashboard',
+      redirect: '/intelligent-kanban/companyOverview',
       children: [
         {
-          path: 'dashboard',
-          name: 'Dashboard',
-          meta: { title: 'dashboard', icon: 'dashboard' }
+          path: '/intelligent-kanban/companyOverview',
+          name: 'companyOverview',
+          meta: { title: 'intelligent-kanban/companyOverview', icon: 'dashboard' }
         }
       ]
     }]
+    // routes: [{
+    //   path: '',
+    //   redirect: 'dashboard',
+    //   children: [
+    //     {
+    //       path: 'dashboard',
+    //       name: 'Dashboard',
+    //       meta: { title: 'dashboard', icon: 'dashboard' }
+    //     }
+    //   ]
+    // }]
   }
 ]
 

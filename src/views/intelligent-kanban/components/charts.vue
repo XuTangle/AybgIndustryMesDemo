@@ -86,6 +86,16 @@ export default {
     }
   },
   methods: {
+    getPositon(point, params, dom, rect, size) {
+      var tipHeight = point[1] + size.contentSize[1]; // contentSize: 提示dom 窗口大小
+        if(tipHeight > size.viewSize[1] ){              // viewSize: echarts 容器大小
+            return [point[0]+40, point[1]-size.contentSize[1]];
+        } else if(point[1] < size.contentSize[1]){
+            return [point[0]+40, point[1]+20];
+        } else {
+            return point;
+        }
+    },
     // 生成图表的唯一ID
     generatorOnlyId() {
       return (
@@ -598,7 +608,6 @@ export default {
           x: "center"
         },
         tooltip: {
-          zlevel:1000000000000,
           trigger: "item",
           formatter: "{a} <br/>{b} : {c} ({d}%)",
           position: function(point, params, dom, rect, size){ // point: 鼠标位置
@@ -619,16 +628,6 @@ export default {
         color:this.colorData,
         series: []
       };
-    },
-    getPositon(point, params, dom, rect, size) {
-      var tipHeight = point[1] + size.contentSize[1]; // contentSize: 提示dom 窗口大小
-        if(tipHeight > size.viewSize[1] ){              // viewSize: echarts 容器大小
-            return [point[0]+40, point[1]-size.contentSize[1]];
-        } else if(point[1] < size.contentSize[1]){
-            return [point[0]+40, point[1]+20];
-        } else {
-            return point;
-        }
     }
   },
   watch: {},
