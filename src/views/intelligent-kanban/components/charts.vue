@@ -203,7 +203,7 @@ export default {
           x: "center"
         },
         legend: {
-          x: 'right',
+         x: 'center',
           data:this.legendData,
           itemWidth: 10,
           itemHeight: 8,
@@ -327,7 +327,7 @@ export default {
           }
         },
          legend: {
-          x: 'right',
+          x: 'center',
           data: this.legendData,
           itemWidth: 10,
           itemHeight: 8,
@@ -401,7 +401,7 @@ export default {
           }
         },
         legend: {
-          x: 'right',
+          x: 'center',
           data:this.legendData,
           itemWidth: 10,
           itemHeight: 8,
@@ -607,7 +607,7 @@ export default {
         },
         legend: {
           orient: "horizontal",   // 布局方式，默认为水平布局，可选为：'horizontal' | 'vertical'
-          left: "right",
+          x: 'center',
           data: this.legendData,
           itemWidth: 10,
           itemHeight: 8,

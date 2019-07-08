@@ -5,74 +5,75 @@
       <div class="card-head">
         <span>生产产量</span>
       </div>
-      <charts chartType="bar" :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" ></charts>
-      <TablePerform  />
+      <charts chartType="bar" :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" style="width: 55%" ></charts>
+      <TablePage class="tables"  />
     </div>
     <div class="card">
       <div class="card-head">
         <span>原料库存</span>
       </div>
-      <charts chartType="bar" :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" ></charts>
-      <TablePerform  />
+      <charts chartType="bar" :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" style="width: 55%" ></charts>
+      <TablePage class="tables"  />
     </div>
      <div class="card">
       <div class="card-head">
         <span>生产绩效</span>
       </div>
       
-        <ProductConsumption />
-         <TablePerform  />
+        <charts chartType="pie1" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2" style="width: 55%"></charts>
+         <TablePage class="tables"  />
     
     </div>
     <div class="card">
       <div class="card-head">
         <span>生产消耗</span>
       </div>
-      <ProductConsumption />
-      <TablePerform  />
+      <charts chartType="pie1" :xList="xList_left2" :yList="yList_left2" :xText="xText_left2" :yText="yText_left2" style="width: 50%"></charts>
+      <TablePage class="tables"  />
     </div>
      <div class="card">
       <div class="card-head">
         <span>生产绩效</span>
       </div>
       
-         <charts chartType="bar" :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" ></charts>
-         <TablePerform  />
+         <charts chartType="bar" :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" style="width:55%" ></charts>
+         <TablePage class="tables"  />
     
     </div>
     <div class="card">
       <div class="card-head">
         <span>生产消耗</span>
       </div>
-      <charts chartType="bar" :xList="xList_bottom2" :yList="yList_bottom2" :xText="xText_bottom2" :yText="yText_bottom2"></charts>
-      <TablePerform  />
+      <charts chartType="bar" :xList="xList_bottom2" :yList="yList_bottom2" :xText="xText_bottom2" :yText="yText_bottom2" style="width: 55%"></charts>
+      <TablePage class="tables"  />
     </div>
         <div class="card">
       <div class="card-head">
         <span>生产产量</span>
       </div>
-      <charts chartType="bar" :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" ></charts>
+      <charts chartType="bar" :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" style="width: 55%"></charts>
     </div>
     <div class="card">
       <div class="card-head">
         <span>原料库存</span>
       </div>
-      <charts chartType="bar" :xList="xList_left1" :yList="yList_left1" :xText="xText_left1" :yText="yText_left1" ></charts>
+      <charts chartType="bar1" :xList="xList_left3" :yList="yList_left3" :xText="xText_left3" :yText="yText_left3" style="width: 55%" ></charts>
+      <TablePage :datasource="datasource"></TablePage>
     </div>
   </div>
 </template>
 
 <script>
-import ProductOutput from './kpi/components/product-output'
-import ProductPerform from './kpi/components/product-perform'
-import ProductConsumption from './kpi/components/product-consumption'
-import TablePerform from './kpi/table/perform'
 import charts from "./components/charts";
+import TablePage from './components/tablePage'
 export default {
   name: 'LineChart',
-  components: { ProductPerform, ProductConsumption, TablePerform, ProductOutput, charts },
+  components: {  charts,TablePage },
    data() {
     return {
+      datasource:[{'id': '1', 'name': '小红', 'age': '12'},
+                  {'id': '2', 'name': '小丽', 'age': '12'},
+                  {'id': '2', 'name': '小丽', 'age': '12'}],
       // tabPosition: "bar",
       // chartRefs: ["line", "bar", "pie"],
        chartData: [["类别1", 100], ["类别2", 20], ["类别3", 30], ["类别3", 70]],
@@ -80,17 +81,17 @@ export default {
       
      
       // X  Y轴交换位置Demo  响应的html代码也有修改 chartType=bar
-      // xList_left1:['称重给煤机','斗式提升机','二次风机','高压流化风机'],
-      // yList_left1:[[100,20,50,70],[30,60,70,28],[70,80,20,98],[10,80,50,38]],
-      // xText_left1:'设备腐蚀',  // x坐标的提示信息
-      // yText_left1:[['点蚀','bar','#a6d192'],['缝隙腐蚀','bar','#99bce0'],['磨损腐蚀','bar','#767db9'],['应力腐蚀','bar','#0ca2a3']], // y坐标的提示信息，chart类型，以及颜色数据
+      xList_left3:['称重给煤机','斗式提升机','二次风机','高压流化风机'],
+      yList_left3:[[100,20,50,70],[30,60,70,28],[70,80,20,98],[10,80,50,38]],
+      xText_left3:'设备腐蚀',  // x坐标的提示信息
+      yText_left3:[['点蚀','bar','#a6d192'],['缝隙腐蚀','bar','#99bce0'],['磨损腐蚀','bar','#767db9']], // y坐标的提示信息，chart类型，以及颜色数据
       
       stackFlag : true,   // 状态图是否要堆积数据 默认false
 
-      xList_left1:['称重给煤机','斗式提升机','二次风机','高压流化风机'],
+      xList_left1:['SPHC','冷轧料','管线钢','低合金钢'],
       yList_left1:[[100,20,50,70],[30,60,70,28],[70,80,20,98],[10,80,50,38]],
       xText_left1:'设备腐蚀',  // x坐标的提示信息
-      yText_left1:[['点蚀','bar','#a6d192'],['缝隙腐蚀','bar','#99bce0'],['磨损腐蚀','bar','#767db9'],['应力腐蚀','bar','#0ca2a3']], // y坐标的提示信息，chart类型，以及颜色数据
+      yText_left1:[['当前产量','bar','#a6d192'],['月计划','bar','#99bce0'],['上月实绩','bar','#767db9'],['应力腐蚀','bar','#0ca2a3']], // y坐标的提示信息，chart类型，以及颜色数据
       
 
       // xList_left2:['称重给煤机','斗式提升机','二次风机','高压流化风机'],
@@ -161,13 +162,9 @@ export default {
     /* background: #08263a; */
     display: flex;
     flex-wrap: wrap;
+    overflow: hidden;
 }
-.head{
-   border-width: 2px;
-   border-color: aliceblue;
-   border-style: solid;
-   width: 50%;
-}
+
 .box-card{
     background:none;
     width: 0.5*width;
@@ -185,7 +182,8 @@ export default {
     border-style: solid;
 }
 .card-head{
-  background: rgb(4, 52, 124);
+    background:#124d72;
+   opacity: 0.8;
   color: aliceblue;
   height: 10%;
   display: flex;
@@ -194,6 +192,10 @@ export default {
   font-weight: 600;
   letter-spacing: 3px;
   width: 100%;
+}
+.tables{
+margin-left:0px;
+margin-top: 20px;
 }
 
 </style>
